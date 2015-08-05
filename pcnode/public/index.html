@@ -1,51 +1,32 @@
-<!doctype html>
-<canvas id="canvas" style="border: 1px solid red;"></canvas>
-<style>
-body {
-margin: 0px;
-padding: 0px;
-}
-canvas {
-padding: 0;
-margin: auto;
-display: block;
-width: 800px;
-}
-</style>
-<script>
-/*jshint browser:true*/
-var BLANK_IMG =
-'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='
-var canvas = document.getElementById('canvas')
-, g = canvas.getContext('2d')
-var ws = new WebSocket('ws://localhost:9002', 'minicap')
-ws.binaryType = 'blob'
-ws.onclose = function() {
-console.log('onclose', arguments)
-}
-ws.onerror = function() {
-console.log('onerror', arguments)
-}
-ws.onmessage = function(message) {
-var blob = new Blob([message.data], {type: 'image/jpeg'})
-var URL = window.URL || window.webkitURL
-var img = new Image()
-img.onload = function() {
-console.log(img.width, img.height)
-canvas.width = img.width
-canvas.height = img.height
-g.drawImage(img, 0, 0)
-img.onload = null
-img.src = BLANK_IMG
-img = null
-u = null
-blob = null
-}
-var u = URL.createObjectURL(blob)
-img.src = u
-}
-ws.onopen = function() {
-console.log('onopen', arguments)
-ws.send('1920x1080/0')
-}
-</script>
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Google Glass Projector</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+        <link rel="stylesheet" href="assets/css/main.css" />
+        <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+        <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.min.css" />
+        <!--[if lt IE 9]>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.ie.min.css" />
+        <![endif]-->
+    </head>
+    <body>
+        <div class="github-fork-ribbon-wrapper right">
+            <div class="github-fork-ribbon">
+                <a href="https://github.com/Chrisplus/GoogleGlassProjector">Fork me on GitHub</a>
+            </div>
+        </div>
+        <h3 align="center">Google Glass Projector</h1>
+        <canvas id="canvas" width="640" height="360"></canvas>
+
+        
+        <!-- Scripts -->
+        <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+        
+        <script src="assets/js/main.js"></script>
+        <script src="assets/js/ws.js"></script>
+    </body>
+</html>

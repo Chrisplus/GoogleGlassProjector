@@ -29,6 +29,7 @@ wss.on('connection', function(ws) {
   var readFrameBytes = 0
   var frameBodyLength = 0
   var frameBody = new Buffer(0)
+  
   var banner = {
     version: 0
   , length: 0
@@ -44,7 +45,7 @@ wss.on('connection', function(ws) {
 
   function tryRead() {
     for (var chunk; (chunk = stream.read());) {
-      console.info('chunk(length=%d)', chunk.length)
+      // console.info('chunk(length=%d)', chunk.length)
       for (var cursor = 0, len = chunk.length; cursor < len;) {
         if (readBannerBytes < bannerLength) {
           switch (readBannerBytes) {
@@ -117,11 +118,11 @@ wss.on('connection', function(ws) {
           frameBodyLength += (chunk[cursor] << (readFrameBytes * 8)) >>> 0
           cursor += 1
           readFrameBytes += 1
-          console.info('headerbyte%d(val=%d)', readFrameBytes, frameBodyLength)
+          // console.info('headerbyte%d(val=%d)', readFrameBytes, frameBodyLength)
         }
         else {
           if (len - cursor >= frameBodyLength) {
-            console.info('bodyfin(len=%d,cursor=%d)', frameBodyLength, cursor)
+            // console.info('bodyfin(len=%d,cursor=%d)', frameBodyLength, cursor)
 
             frameBody = Buffer.concat([
               frameBody
@@ -144,7 +145,7 @@ wss.on('connection', function(ws) {
             frameBody = new Buffer(0)
           }
           else {
-            console.info('body(len=%d)', len - cursor)
+            // console.info('body(len=%d)', len - cursor)
 
             frameBody = Buffer.concat([
               frameBody
