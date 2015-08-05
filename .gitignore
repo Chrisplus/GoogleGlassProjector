@@ -25,3 +25,12 @@ proguard/
 
 # Log Files
 *.log
+
+#ndk generated files
+/.env
+/libs/
+/obj/
+/libs/
+/build/
+/temp/
+
