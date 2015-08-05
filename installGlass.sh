@@ -4,6 +4,7 @@ function ctrl_c() {
   # Clean up
   adb shell rm -r $dir
   adb forward --remove-all
+  cd ..
   echo "Bye Bye"
 }
 
