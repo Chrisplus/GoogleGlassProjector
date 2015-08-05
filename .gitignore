@@ -31,4 +31,5 @@ proguard/
 /*/obj/
 /*/libs/
 /*/temp/
+/*/node_modules
 

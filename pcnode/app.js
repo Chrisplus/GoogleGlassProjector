@@ -41,6 +41,7 @@ wss.on('connection', function(ws) {
   , quirks: 0
   }
 
+
   function tryRead() {
     for (var chunk; (chunk = stream.read());) {
       console.info('chunk(length=%d)', chunk.length)
